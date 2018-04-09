@@ -1,5 +1,4 @@
 'use strict';
-
 let plan = `
 ###############
 #             #
@@ -8,6 +7,32 @@ let plan = `
 #             #
 #             #
 ###############`;
+
+let N=20;
+let zone = '\n';
+for (let i = 0; i<N; i++)
+{
+    if ((i==0)||(i==N-1))
+    {
+        for(let j = 0; j<N;j++)
+        {
+            zone+='#';
+        }
+        zone+='\n';
+    }else
+    {
+        for(let j=0;j<N;j++)
+        {
+            if ((j==0)||(j==N-1))
+            {
+                zone+='#';
+            }else 
+            {
+                zone+=' '
+            }  
+        }zone+='\n';
+    }
+}
 
 plan = plan.trim().split('\n');
 
@@ -31,8 +56,10 @@ function printPlan() {
     }
     console.log(s);
 }
-
-printPlan();
+function printSpiral()
+{
+    let s = '';
+}
 
 function moveLeft() {
     if (plan[mageY][mageX - 1] == ' ') {
@@ -120,13 +147,25 @@ if (dirX!==mageX)
         }
     }
     else if (Math.abs(dirY-mageY)==Math.abs(dirX-mageX)) // Если их разница координат равна, то мы будем двигаться по диагонали. Нужно решить - в какую сторону нам идти - вправо вниз или вправо вверх
-    {
-        if (dirY>mageY) // Если dirY больше mageY - двигаемся по диагонали вниз
+    {   
+        if (dirX>mageX)
+        {
+            if (dirY>mageY) // Если dirY больше mageY - двигаемся по диагонали вниз
         {
             moveDownRight();
         }else if (dirY<mageY) //Если dirY меньше mageY - двигаемся по диагонали вверх
         {
             moveUpRight();
+        }
+        }else if (dirX<mageX)
+        {
+            if (dirY>mageY) // Если dirY больше mageY - двигаемся по диагонали вниз
+        {
+            moveDownLeft();
+        }else if (dirY<mageY) //Если dirY меньше mageY - двигаемся по диагонали вверх
+        {
+            moveUpLeft();
+        }
         } 
     }
 }else if (dirX==mageX)
@@ -143,4 +182,14 @@ if (dirX!==mageX)
     } 
 }
 
+}
+function change(a,b)
+{
+  let x1=a;
+  let x2=b;
+  a=a+b;
+  b=a+b;
+  a=b-a;
+  b=b-2*a;
+  console.log(a,b);
 }
